@@ -21,7 +21,7 @@ jobs:
     - name: tst stage
       uses: fjogeleit/http-request-action@v1
       with:
-        token: '${{ GHACTIVITY_BOT_TOKEN }}'
+        token: ${{ secrets.GHACTIVITY_BOT_TOKEN }}
         url: 'https://api.telegram.org/token/sendMessage'
         method: 'POST'
         customHeaders: '{"Content-Type": "application/json"}'
