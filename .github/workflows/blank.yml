@@ -24,3 +24,4 @@ jobs:
         url: 'https://api.telegram.org/${{ secrets.GHACTIVITY_BOT_TOKEN }}/sendMessage'
         method: 'POST'
         customHeaders: '{"Content-Type": "application/json"}'
+        data: '{"chat_id": "368447409", "text": "kek from GitHub"}'
