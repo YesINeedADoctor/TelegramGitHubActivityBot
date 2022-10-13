@@ -97,7 +97,7 @@ public class PostgreSqlDaoTelegramChat implements Dao<TelegramChat> {
             Connection dbConnection = (Connection) rawConnection.get();
             String sql = "INSERT INTO "
                     + "telegram_chats(chat_id, repository_id, last_command) "
-                    + "VALUES(?, ?, ?) ON CONFLICT (chat_id) DO UPDATE SET"
+                    + "VALUES(?, ?, ?) ON CONFLICT (chat_id) DO UPDATE SET "
                     + "repository_id = ?, "
                     + "last_command = ?";
 
@@ -110,6 +110,8 @@ public class PostgreSqlDaoTelegramChat implements Dao<TelegramChat> {
                 statement.setLong(1, nonNullTelegramChat.getId());
                 statement.setObject(2, nonNullTelegramChat.getRepositoryId());
                 statement.setString(3, nonNullTelegramChat.getLastCommand().toString());
+                statement.setObject(4, nonNullTelegramChat.getRepositoryId());
+                statement.setString(5, nonNullTelegramChat.getLastCommand().toString());
                 int numberOfInsertedRows = statement.executeUpdate();
 
 //                 Retrieve the auto-generated id

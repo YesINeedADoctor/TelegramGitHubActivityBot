@@ -105,8 +105,8 @@ public class PostgreSqlDaoRequestRepository implements Dao<RequestRepository> {
             Connection dbConnection = (Connection) rawConnection.get();
             String sql =
                     "INSERT INTO " + "github_repositories(repository_id, name, fullname, description, url) "
-                    + "VALUES(?, ?, ?, ?, ?) ON CONFLICT (repository_id) DO UPDATE SET "
-                    + "name = ?, fullname = ?, description = ?, url = ?";
+                            + "VALUES(?, ?, ?, ?, ?) ON CONFLICT (repository_id) DO UPDATE SET "
+                            + "name = ?, fullname = ?, description = ?, url = ?";
 
             try (dbConnection; PreparedStatement statement = dbConnection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -147,7 +147,11 @@ public class PostgreSqlDaoRequestRepository implements Dao<RequestRepository> {
 
         if (rawConnection.isPresent()) {
             Connection dbConnection = (Connection) rawConnection.get();
-            String sql = "UPDATE github_repositories " + "SET " + "name = ?, " + "fullname = ?, " + "description = ?, " + "url = ? " + "WHERE " + "repository_id = ?";
+            String sql = "UPDATE github_repositories "
+                    + "SET "
+                    + "name = ?, fullname = ?, "
+                    + "description = ?, url = ? "
+                    + "WHERE repository_id = ?";
 
             try (dbConnection; PreparedStatement statement = dbConnection.prepareStatement(sql)) {
 
