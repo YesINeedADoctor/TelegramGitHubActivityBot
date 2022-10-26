@@ -2,6 +2,7 @@ package io.project.SpringTelegramGHActivityBot.db;
 
 import io.project.SpringTelegramGHActivityBot.config.JdbcConfig;
 import io.project.SpringTelegramGHActivityBot.data.RequestRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
@@ -19,6 +20,7 @@ public class PostgreSqlDaoRequestRepository implements Dao<RequestRepository> {
 
     private JdbcConnection jdbcConnection;
 
+    @Autowired
     public PostgreSqlDaoRequestRepository(JdbcConfig jdbcConfig) {
         jdbcConnection = new JdbcConnection(jdbcConfig);
     }

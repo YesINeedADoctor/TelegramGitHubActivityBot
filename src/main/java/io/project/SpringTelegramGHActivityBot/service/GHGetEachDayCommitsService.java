@@ -3,12 +3,12 @@ package io.project.SpringTelegramGHActivityBot.service;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import io.project.SpringTelegramGHActivityBot.config.IntegrationConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -16,6 +16,7 @@ public class GHGetEachDayCommitsService extends IntegrationService {
     private Integer totalCommits;
     private final IntegrationConfig integrationConfig;
 
+    @Autowired
     public GHGetEachDayCommitsService(IntegrationConfig integrationConfig) {
         this.integrationConfig = integrationConfig;
     }

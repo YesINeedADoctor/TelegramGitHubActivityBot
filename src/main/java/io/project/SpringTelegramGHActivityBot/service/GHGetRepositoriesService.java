@@ -10,6 +10,7 @@ import io.project.SpringTelegramGHActivityBot.data.RequestRepository;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.Gson;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,6 +19,7 @@ public class GHGetRepositoriesService extends IntegrationService {
     private RequestRepository foundRepository;
     private final IntegrationConfig integrationConfig;
 
+    @Autowired
     public GHGetRepositoriesService(IntegrationConfig IntegrationConfig) {
         this.integrationConfig = IntegrationConfig;
     }

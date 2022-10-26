@@ -37,6 +37,7 @@ public class BotProcessService {
     private final MessagesSender messagesSender;
     LinkedBlockingQueue<Update> BQ = new LinkedBlockingQueue<>();
 
+    @Autowired
     public BotProcessService(TelegramBot bot) {
         this.bot = bot;
         messagesSender = new MessagesSender(BQ, this);
@@ -48,8 +49,8 @@ public class BotProcessService {
     private PostgreSqlDaoRequestRepository REPOSITORY_DAO;
     @Autowired
     private PostgreSqlDaoTelegramChat TELEGRAMCHAT_DAO;
-    @Autowired
-    private IntegrationConfig IntegrationConfig;
+    //    @Autowired
+//    private IntegrationConfig IntegrationConfig;
     @Autowired
     private GHGetPullRequestsService getPullRequestsService;
     @Autowired
@@ -174,10 +175,13 @@ public class BotProcessService {
                         );
                         firstParam = firstParam.equals("ERR") ? DefaultMessages.SERVICE_CURRENTLY_UNAVAILABLE.getMessage() :
                                 String.valueOf(getEachDayCommitsService.getTotalCommitsCount());
+
                         secondParam = secondParam.equals("ERR") ? DefaultMessages.SERVICE_CURRENTLY_UNAVAILABLE.getMessage() :
                                 String.valueOf(getWeeklyParticipationService.getLastWeekCommitsCount());
+
                         thirdParam = thirdParam.equals("ERR") ? DefaultMessages.SERVICE_CURRENTLY_UNAVAILABLE.getMessage() :
                                 String.valueOf(getPullRequestsService.getPullRequestsCount());
+
                         returnText = DefaultMessages.REPOSITORY_ACTIVITY_RETURN_TEXT.getMessage().formatted(
                                 firstParam,
                                 secondParam,
@@ -225,11 +229,13 @@ public class BotProcessService {
             returnText = DefaultMessages.NO_SUCH_COMMAND.getMessage();
             lastCommand = Command.STUB;
         }
-        //update db
-        updateTelegramChatDB(new TelegramChat.Builder(currentChatId)
-                .setRepositoryId(currentRepositoryId)
-                .setLastCommand(lastCommand)
-                .build());
+        //update db if necessary
+        if (!lastCommand.equals(Command.CLEAR_DATA)) {
+            updateTelegramChatDB(new TelegramChat.Builder(currentChatId)
+                    .setRepositoryId(currentRepositoryId)
+                    .setLastCommand(lastCommand)
+                    .build());
+        }
         SendMessage(message.getChatId(), returnText);
     }
 

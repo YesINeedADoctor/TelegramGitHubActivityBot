@@ -3,6 +3,7 @@ package io.project.SpringTelegramGHActivityBot.db;
 import io.project.SpringTelegramGHActivityBot.config.JdbcConfig;
 import io.project.SpringTelegramGHActivityBot.data.Command;
 import io.project.SpringTelegramGHActivityBot.data.TelegramChat;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
@@ -20,6 +21,7 @@ public class PostgreSqlDaoTelegramChat implements Dao<TelegramChat> {
 
     private JdbcConnection jdbcConnection;
 
+    @Autowired
     public PostgreSqlDaoTelegramChat(JdbcConfig jdbcConfig) {
         jdbcConnection = new JdbcConnection(jdbcConfig);
     }

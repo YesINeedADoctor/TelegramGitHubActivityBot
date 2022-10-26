@@ -17,12 +17,17 @@ public class TelegramBot extends TelegramLongPollingBot {
     @Lazy
     private BotProcessService BPS;
 
+    @Autowired
     public TelegramBot(BotConfig config) {
         this.config = config;
         log.info("[TelegramBot] is created");
     }
 
-    public void initBPS(){
+    public void startBot(){
+        this.initBPS();
+    }
+
+    private void initBPS(){
         BPS.startDBServices();      // - creates db and needed tables in db
         BPS.startMessagesSender();  // - starts messages sender from queue
     }

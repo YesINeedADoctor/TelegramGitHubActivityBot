@@ -2,10 +2,10 @@ package io.project.SpringTelegramGHActivityBot.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Repository;
 
-@Configuration
 @Data
+@Repository
 public class JdbcConfig {
 
     @Value("${spring.datasource.url}")

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import io.project.SpringTelegramGHActivityBot.config.IntegrationConfig;
 import io.project.SpringTelegramGHActivityBot.data.PullRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -15,12 +16,12 @@ import java.util.List;
 public class GHGetPullRequestsService extends IntegrationService {
 
     private final IntegrationConfig config;
-//    private List<PullRequest> foundPullRequests = new ArrayList<>();
 
     private PullRequest LastPullRequest;
 
     private Integer PullRequestsNumber;
 
+    @Autowired
     public GHGetPullRequestsService(IntegrationConfig config) {
         this.config = config;
     }
